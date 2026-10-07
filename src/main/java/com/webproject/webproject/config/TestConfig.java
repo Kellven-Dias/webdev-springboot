@@ -2,6 +2,7 @@ package com.webproject.webproject.config;
 
 import com.webproject.webproject.entities.Order;
 import com.webproject.webproject.entities.User;
+import com.webproject.webproject.entities.enums.OrderStatus;
 import com.webproject.webproject.repositories.OrderRepository;
 import com.webproject.webproject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,9 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1, u2));
 
-        Order o1 = new Order(null, Instant.parse("2026-10-05T08:00:00Z"), u1);
-        Order o2 = new Order(null, Instant.parse("2026-10-05T09:00:00Z"), u2);
-        Order o3 = new Order(null, Instant.parse("2026-10-05T07:00:00Z"), u1);
+        Order o1 = new Order(null, Instant.parse("2026-10-05T08:00:00Z"), OrderStatus.WAITING_PAYMENT, u1);
+        Order o2 = new Order(null, Instant.parse("2026-10-05T09:00:00Z"), OrderStatus.PAID, u2);
+        Order o3 = new Order(null, Instant.parse("2026-10-05T07:00:00Z"), OrderStatus.SHIPPED, u1);
 
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
     }
